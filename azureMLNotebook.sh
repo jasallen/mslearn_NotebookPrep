@@ -30,7 +30,7 @@ workspaceName="sandbox-ml"
 az ml workspace create -w $workspaceName -g $(echo $resourceGroupName) --location eastus
 az ml folder attach -w $workspaceName -g $(echo $resourceGroupName)
 
-computeName="gpu-compute$(echo $RANDOM)"
+computeName="sandboxgpu-compute$(echo $RANDOM)"
 ssh-keygen -q -t rsa -N '' -f ~/.ssh/compute_rsa <<<y 2>&1 >/dev/null
 az ml computetarget create computeinstance \
     --admin-user-ssh-public-key "$(cat ~/.ssh/compute_rsa.pub)" \
@@ -50,8 +50,8 @@ Jupyter=$(echo "$computeDetails" | cut -f4)
 
 ssh -q -o "StrictHostKeyChecking no" $computeUser@$computeIp -p $computePort -i ~/.ssh/compute_rsa <<-ENDSSH
     # in ssh session
-    mkdir -p cloudfiles/code/Users/$computeUser
-    cd cloudfiles/code/Users/$computeUser
+    mkdir -p /mnt/batch/tasks/shared/LS_root/mounts/clusters/$computeName/code/Users/$computeUser
+    cd /mnt/batch/tasks/shared/LS_root/mounts/clusters/$computeName/code/Users/$computeUser
     git clone https://github.com/MicrosoftDocs/ml-basics
 ENDSSH
 
