@@ -33,7 +33,7 @@ az ml folder attach -w $workspaceName -g $(echo $resourceGroupName)
 computeName="gpu-compute$(echo $RANDOM)"
 ssh-keygen -q -t rsa -N '' -f ~/.ssh/compute_rsa <<<y 2>&1 >/dev/null
 az ml computetarget create computeinstance \
-    --admin-user-ssh-public-key "$(cat ~/.ssh/id_rsa.pub)" \
+    --admin-user-ssh-public-key "$(cat ~/.ssh/compute_rsa.pub)" \
     --ssh-public-access True \
     -n $computeName -s Standard_NC6 
 
