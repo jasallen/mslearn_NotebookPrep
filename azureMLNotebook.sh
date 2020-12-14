@@ -50,7 +50,7 @@ Jupyter=$(echo "$computeDetails" | cut -f4)
 
 ssh -q -o "StrictHostKeyChecking no" $computeUser@$computeIp -p $computePort -i ~/.ssh/compute_rsa <<-ENDSSH
     # in ssh session
-    mkdir cloudfiles/code/Users/$computeUser
+    mkdir -p cloudfiles/code/Users/$computeUser
     cd cloudfiles/code/Users/$computeUser
     git clone https://github.com/MicrosoftDocs/ml-basics
 ENDSSH
