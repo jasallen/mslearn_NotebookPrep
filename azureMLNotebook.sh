@@ -52,7 +52,7 @@ ssh -q -o "StrictHostKeyChecking no" $computeUser@$computeIp -p $computePort -i 
     # in ssh session
     mkdir -p /mnt/batch/tasks/shared/LS_root/mounts/clusters/$computeName/code/Users/$computeUser
     cd /mnt/batch/tasks/shared/LS_root/mounts/clusters/$computeName/code/Users/$computeUser
-    git clone https://github.com/MicrosoftDocs/ml-basics
+    git clone $1
 ENDSSH
 
 echo "$Jupyter/tree/Users/$computeUser"
